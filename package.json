@@ -1,0 +1,26 @@
+{
+  "name": "trading-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generate-swagger": "node_modules/.bin/swagger-jsdoc -d swagger.json -o swagger-output.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tejeshwar kumar",
+  "license": "ISC",
+  "dependencies": {
+    "ccxt": "^4.0.54",
+    "dotenv": "^16.3.1",
+    "ether.js": "^1.0.0",
+    "ethers": "^6.7.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.46.0",
+    "eslint-config-airbnb": "^19.0.4"
+  }
+}

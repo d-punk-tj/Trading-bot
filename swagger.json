@@ -1,0 +1,193 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "API Documentation",
+      "description": "Documentation for your API"
+    },
+    "basePath": "/",
+    "schemes": ["http", "https"],
+    "paths": {
+      "/ether/validate/{address}": {
+        "get": {
+          "tags": ["Ether"],
+          "summary": "Check if a wallet address is valid.",
+          "description": "This endpoint checks whether a given Ethereum wallet address is valid or not.",
+          "parameters": [
+            {
+              "name": "address",
+              "in": "path",
+              "required": true,
+              "description": "The Ethereum wallet address to validate.",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Boolean indicating whether the address is valid or not.",
+              "schema": {
+                "$ref": "#/definitions/EtherAddressValidationResponse"
+              },
+              "examples": {
+                "application/json": {
+                  "isValid": true
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request, invalid address format.",
+              "examples": {
+                "application/json": {
+                  "message": "Invalid address format"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/ether/createWallet": {
+        "get": {
+          "tags": ["Ether"],
+          "summary": "Create a new Ethereum wallet.",
+          "description": "This endpoint generates a new random Ethereum wallet.",
+          "responses": {
+            "200": {
+              "description": "The generated Ethereum wallet.",
+              "schema": {
+                "$ref": "#/definitions/EtherWallet"
+              },
+              "examples": {
+                "application/json": {
+                  "address": "0x...",
+                  "privateKey": "..."
+                }
+              }
+            }
+          }
+        }
+      },
+      "/ether/latestTransactions": {
+        "get": {
+          "tags": ["Ether"],
+          "summary": "Get the latest 1000 Ethereum transactions.",
+          "description": "This endpoint fetches and returns the latest 1000 Ethereum transactions.",
+          "responses": {
+            "200": {
+              "description": "List of the latest transactions.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/EtherTransaction"
+                }
+              },
+              "examples": {
+                "application/json": [
+                  {
+                    "transactionHash": "...",
+                    "senderAddress": "...",
+                    "receiverAddress": "...",
+                    "amount": "...",
+                    "blockNumber": 12345
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "/cctx/tradableCoins": {
+        "get": {
+          "tags": ["CCTX"],
+          "summary": "Get the list of tradable coins on Binance.",
+          "description": "This endpoint retrieves the list of coins that are tradable on the Binance exchange.",
+          "responses": {
+            "200": {
+              "description": "List of tradable coins.",
+              "schema": {
+                "$ref": "#/definitions/CCTXTradableCoinsResponse"
+              },
+              "examples": {
+                "application/json": ["BTC", "ETH", "XRP"]
+              }
+            }
+          }
+        }
+      },
+      "/cctx/averagePrices": {
+        "get": {
+          "tags": ["CCTX"],
+          "summary": "Get the average prices of tradable coins.",
+          "description": "This endpoint fetches and returns the average prices of recent trades for each tradable coin on Binance.",
+          "responses": {
+            "200": {
+              "description": "Object containing average prices for each coin.",
+              "schema": {
+                "$ref": "#/definitions/CCTXAveragePricesResponse"
+              },
+              "examples": {
+                "application/json": {
+                  "BTC": 40000,
+                  "ETH": 2500,
+                  "XRP": 1.5
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "EtherAddressValidationResponse": {
+        "type": "object",
+        "properties": {
+          "isValid": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EtherWallet": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "privateKey": {
+            "type": "string"
+          }
+        }
+      },
+      "EtherTransaction": {
+        "type": "object",
+        "properties": {
+          "transactionHash": {
+            "type": "string"
+          },
+          "senderAddress": {
+            "type": "string"
+          },
+          "receiverAddress": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "blockNumber": {
+            "type": "integer"
+          }
+        }
+      },
+      "CCTXTradableCoinsResponse": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "CCTXAveragePricesResponse": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "number"
+        }
+      }
+    }
+  }
+  
